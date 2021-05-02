@@ -2,7 +2,7 @@
 - A Mask RCNN model integrated with a website able to detect damages on a vehicle for vehicle claim approval at insurance firm
 - Used: Django, Python, Keras, OpenCV, Mask-RCNN, HTML, CSS, AJAX
 
-## LOL
+## WEBSITE WALKTHROUGH
 - Customer Login
 ![](1.JPG)
 - Add Images of all the sides of the car
