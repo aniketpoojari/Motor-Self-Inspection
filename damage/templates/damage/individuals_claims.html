@@ -1,0 +1,57 @@
+{% include 'damage/navigation.html' %}
+{% if stat %}
+<div class="uk-text-large uk-text-muted uk-text-center uk-text-uppercase">{{ stat }}</div>
+{% else %}
+<div class="uk-container">
+	<div class="uk-text-large uk-text-muted uk-text-left uk-text-uppercase">{{ individual }}</div>
+	<input class="uk-input" type="text" id="myInput" onkeyup="myFunction()" placeholder="SEARCH.." title="Type in a name">
+	<table class="uk-table uk-table-hover uk-table-divider" id="myTable">
+	    <thead>
+	        <tr>
+	            <th>CLAIM ID</th>
+	            <th>STATUS</th>
+	            <th>LINK</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	{% for claim in claims %}
+	        <tr>
+	        	<td>{{ claim.claimno }}</td>
+	        	{% if claim.status == 0 %}
+	            	<td class="uk-text-muted">NOT SEEN</td>
+	            {% endif %}
+	            {% if claim.status == 1 %}
+	            	<td class="uk-text-success">ACCEPTED</td>
+	            {% endif %}
+	            {% if claim.status == 2 %}
+	            	<td class="uk-text-danger">REJECTED</td>
+	            {% endif %}
+	            <td><a class="uk-button uk-button-default uk-button-large" href="/individualclaim/{{ claim.claimno }}">VIEW</a></td>
+	        </tr>
+	        {% endfor %}
+	    </tbody>
+	</table>
+</div>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+{% endif %}
+</body>
+</html>

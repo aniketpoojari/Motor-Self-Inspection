@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LOGIN</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+</head>
+<body>
+	<div class="wrapper">
+  		<div id="formContent">
+    <!-- Tabs Titles -->
+    		<h2 class="active">Customer Sign In </h2>
+			<form method="POST">
+				{% csrf_token %}
+				<h4 style="color: #ff0000">{{ status }}</h4>
+				<input type="email" name="email" id="email" class="fadeIn second" placeholder="EmailID" required="">
+				<input type="password" name="password" id="pasword" class="fadeIn third" placeholder="Password" required="">
+				<input type="submit" class="fadeIn fourth" value="Log In">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

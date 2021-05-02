@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- UIkit CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/css/uikit.min.css" />
+	<link rel="stylesheet" type="text/css" href="{% static 'navigation.css' %}">
+
+	<!-- UIkit JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script>
+	<script src="{% static 'navigation.js' %}" type="text/javascript"></script>
+</head>
+<body>
+	<nav class="uk-navbar-container uk-margin" uk-navbar>
+		<div class="uk-navbar-left">
+			{% if request.user.is_superuser %}
+				<a class="uk-navbar-item uk-logo">COCO</a>
+			{% else %}
+				<a class="uk-navbar-item uk-logo" href="/index/">COCO</a>
+			{% endif %}
+		</div>
+		<div class="uk-navbar-right">
+			<div class="uk-navbar-item uk-text-uppercase" >
+				WELCOME {{ name }}
+			</div>
+			<div class="uk-navbar-item">
+				<a class="uk-link-muted" href="/claims/">CLAIMS</a>
+			</div>
+			<div class="uk-navbar-item">		
+				<form action="/logout/"  method="POST">
+					{% csrf_token %}
+					<button class="uk-button uk-button-default">LOGOUT</button>
+				</form>
+			</div>
+		</div>
+	</nav>

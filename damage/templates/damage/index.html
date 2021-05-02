@@ -1,0 +1,103 @@
+{% include 'damage/navigation.html' %}
+	{% if not claimno %}
+  <center>
+	<form action="" enctype="multipart/form-data" method="POST">
+		{% csrf_token %}
+	<table style="border-collapse:collapse;">
+		<tr>
+		  <td style="border-bottom: 1px solid lightgrey;">
+	    	<div class="file-upload">
+  				<button class="uk-button uk-button-default file-upload-btn" type="button" onclick="$('.file-upload-input-front').trigger( 'click' )">Add Front Side Image</button>
+  				<div class="image-upload-wrap-front">
+    				<input class="file-upload-input-front" name="front" type='file' onchange="readURLFront(this);" accept="image/*" required />
+    				<div class="drag-text">
+      					<h3>Drag and drop a file or select add Image</h3>
+    				</div>
+  				</div>
+  				<div class="file-upload-content-front">
+    				<img class="file-upload-image-front" src="#" alt="your image" />
+    				<div class="image-title-wrap">
+      					<button type="button" onclick="removeUploadFront()" class="uk-button uk-button-default remove-image">Remove <span class="image-title-front">Uploaded Image</span></button>
+    				</div>
+  				</div>
+		    </div>
+		  </td>
+		<td style="border-bottom: 1px solid lightgrey; border-left: 1px solid lightgrey">
+			<div class="file-upload">
+  				<button class="uk-button uk-button-default file-upload-btn" type="button" onclick="$('.file-upload-input-left').trigger( 'click' )">Add Left Side Image</button>
+
+  				<div class="image-upload-wrap-left">
+    				<input class="file-upload-input-left" name="left" type='file' onchange="readURLLeft(this);" accept="image/*" required/>
+    				<div class="drag-text">
+      					<h3>Drag and drop a file or select add Image</h3>
+    				</div>
+  				</div>
+  				<div class="file-upload-content-left">
+    				<img class="file-upload-image-left" src="#" alt="your image" />
+    				<div class="image-title-wrap">
+      					<button type="button" onclick="removeUploadLeft()" class="uk-button uk-button-default remove-image">Remove <span class="image-title-left">Uploaded 	Image</span></button>
+    				</div>
+  				</div>
+			</div>
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<div class="file-upload">
+  				<button class="uk-button uk-button-default file-upload-btn" type="button" onclick="$('.file-upload-input-back').trigger( 'click' )">Add Back Side Image</button>
+
+  				<div class="image-upload-wrap-back">
+    				<input class="file-upload-input-back" name="back" type='file' onchange="readURLBack(this);" accept="image/*" required/>
+    				<div class="drag-text">
+      					<h3>Drag and drop a file or select add Image</h3>
+    				</div>
+  				</div>
+  				<div class="file-upload-content-back">
+    				<img class="file-upload-image-back" src="#" alt="your image" />
+    				<div class="image-title-wrap">
+      					<button type="button" onclick="removeUploadBack()" class="uk-button uk-button-default remove-image">Remove <span class="image-title-back">Uploaded Image</span></button>
+    				</div>
+  				</div>
+			</div>
+		</td>
+		<td style="border-left: 1px solid lightgrey;">
+			<div class="file-upload">
+  				<button class="file-upload-btn uk-button uk-button-default" type="button" onclick="$('.file-upload-input-right').trigger( 'click' )">Add Right Side Image</button>
+
+  				<div class="image-upload-wrap-right">
+    				<input class="file-upload-input-right" name="right" type='file' onchange="readURLRight(this);" accept="image/*" required/>
+    				<div class="drag-text">
+      					<h3>Drag and drop a file or select add Image</h3>
+    				</div>
+  				</div>
+  				<div class="file-upload-content-right">
+    				<img class="file-upload-image-right" src="#" alt="your image" />
+    				<div class="image-title-wrap">
+      					<button type="button" onclick="removeUploadRight()" class="uk-button uk-button-default remove-image">Remove <span class="image-title-right">Uploaded Image</span></button>
+    				</div>
+  				</div>
+			</div>
+			</td>
+		</tr>
+	</table>	
+		<input class="uk-margin-top uk-margin-medium-bottom uk-button uk-button-primary" type="submit">
+	</form>
+</center>
+	{% endif %}
+
+
+    {% if claimno %}
+    <script type="text/javascript">
+		var xhttp = new XMLHttpRequest();
+	  	xhttp.open("GET", "../detection/{{ claimno }}", true);
+	  	xhttp.send();
+	  	setTimeout(function(){
+	  		window.location.href = "/result/"
+	  	}, 1000)
+	</script>
+    {% endif %}
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

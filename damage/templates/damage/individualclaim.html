@@ -1,0 +1,61 @@
+{% include 'damage/navigation.html' %}
+{% load static %}
+<div class="uk-container">
+	<div uk-grid>
+	    {% for image in images %}
+	    <div>
+	    <li>
+	        <img src="{% static image %}" width=450 uk-img>
+	    </li>
+	    </div>
+	    {% endfor %}
+	</div>
+</div>
+{% if request.user.is_superuser and request.user|slugify != claimdetails.userid|slugify %}
+<div class="uk-container uk-margin-large-top uk-margin-large-bottom">
+<fieldset class="uk-fieldset" {% if not request.user.is_superuser %}disabled="disabled"{% endif %}>
+	<form method="POST">
+		{% csrf_token %}
+		
+		<div>REASON</div><br/>
+		
+		<textarea class="uk-textarea uk-margin-medium-bottom" name="description">{{ claimdetails.description }}</textarea></br>
+	
+		<div>STATUS</div><br/>
+		
+		<span class="uk-text-success">ACCEPTED</span>
+		<input type="radio" class="uk-radio uk-margin-small-left" name="status" {% if claimdetails.status == 1 %}checked{% endif %} value="1"><br/>
+		
+		<span class="uk-text-danger">REJECTED</span>
+		<input type="radio" class="uk-radio uk-margin-small-left" name="status" {% if claimdetails.status == 2 %}checked{% endif %} value="2"><br/>
+		
+		<button class="uk-button uk-button-default uk-margin-medium-top" type="submit">Submit</button>
+		
+
+		<a class="uk-button uk-button-default uk-margin-medium-top" href="/download/{{ claimdetails.claimno }}" download>download</a>
+
+	</form>
+</fieldset>
+</div>
+{% else %}
+<div class="uk-container uk-margin-large-top uk-margin-large-bottom">
+		{% if claimdetails.status == 0 %}
+			<div class="uk-text-center uk-text-large uk-text-uppercase uk-text-muted">your claim is under evaluation</div>
+		{% endif %}
+		{% if claimdetails.status == 1 %}
+			<div class="uk-text-center uk-text-large uk-text-uppercase uk-text-success">your claim is accepted</div>
+		{% endif %}
+		{% if claimdetails.status == 2 %}
+			<div class="uk-text-center uk-text-large uk-text-uppercase uk-text-danger">your claim rejected</div>
+		{% endif %}
+		
+		<div class="uk-margin-medium-top">REASON</div><br/>
+		
+		<textarea class="uk-textarea uk-margin-medium-bottom" disabled="true">{{ claimdetails.description }}</textarea></br>
+
+</div>
+{% endif %}
+</body>
+</html>
+<div>
+ 

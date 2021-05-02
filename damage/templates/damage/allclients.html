@@ -1,0 +1,53 @@
+{% include 'damage/navigation.html' %}
+
+
+<div class="uk-container">
+	<input class="uk-input" type="text" id="myInput" onkeyup="myFunction()" placeholder="SEARCH.." title="Type in a name">
+	<table class="uk-table uk-table-hover uk-table-divider" id="myTable">
+	    <thead>
+	        <tr>
+	            <th>EMAIL ID</th>
+	            <th>TOTAL</th>
+	            <th>NOT VIEWED</th>
+	            <th class="uk-text-success">ACCEPTED</th>
+	            <th class="uk-text-danger">REJECTED</th>
+	            <th>VIEW DETAILS</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	{% for key, value in d.items %}
+	        <tr>
+	            <td>{{key}}</td>
+	            <td>{{value.0}}</td>
+	            <td>{{value.1}}</td>
+	            <td class="uk-text-success">{{value.2}}</td>
+	            <td class="uk-text-danger">{{value.3}}</td>
+	            <td><a class="uk-button uk-button-default uk-button-large" href="/individuals_claims_from_superuser/{{key}}">VIEW</a></td>
+	        </tr>
+	        {% endfor %}
+	    </tbody>
+	</table>
+</div>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+</body>
+</html>
