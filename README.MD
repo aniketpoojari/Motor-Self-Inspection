@@ -4,7 +4,7 @@
 
 ## LOL
 - Customer Login
-![](1.JPG)
+![alt text](1.jpg)
 - Add Images of all the sides of the car
 ![](2.JPG)
 - Results of the detection
