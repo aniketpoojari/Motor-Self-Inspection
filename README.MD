@@ -3,7 +3,7 @@
 - Used: Django, Python, Keras, OpenCV, Mask-RCNN, HTML, CSS, AJAX
 
 ## LOL
-![Customer Login](1.jpg)
+![Alt text](1.JPG?raw=true "Customer Login")
 - Add Images of all the sides of the car
 ![](2.JPG)
 - Results of the detection
